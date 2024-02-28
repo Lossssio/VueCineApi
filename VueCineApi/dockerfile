@@ -1,0 +1,35 @@
+# Etapa de construcción para la aplicación ASP.NET Core
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /app
+
+# Copiar csproj y restaurar las dependencias
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copiar el resto de los archivos del proyecto
+COPY . ./
+
+# Construir la aplicación
+RUN dotnet publish -c Release -o out
+
+# Etapa de ejecución para la aplicación ASP.NET Core
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+WORKDIR /app
+COPY --from=build-env /app/out .
+
+# Exponer el puerto y establecer el punto de entrada para la aplicación ASP.NET Core
+EXPOSE 80
+ENTRYPOINT ["dotnet", "api.dll"]
+
+# Etapa de ejecución para SQL Server 
+FROM mcr.microsoft.com/mssql/server:2019-CU21-ubuntu-20.04 AS sql-server
+
+# Configurar las variables de entorno necesarias
+ENV ACCEPT_EULA=Y
+ENV MSSQL_SA_PASSWORD=YourStrong@Passw0rd1!
+ENV MSSQL_DB=DatosPeli
+ENV MSSQL_USER=MarioReyes
+ENV MSSQL_PASSWORD=PasswordPeli
+
+# Exponer el puerto de SQL Server si es necesario
+# Expose the SQL Server port if needed

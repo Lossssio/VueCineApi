@@ -1,0 +1,29 @@
+version: '3.4'
+
+networks:
+  backend:
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-CU21-ubuntu-20.04
+    ports:
+      - "8002:1433"
+    networks:
+      - backend
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Passw0rd1!
+      - MSSQL_DB=DatosPeli
+      - MSSQL_USER=MarioReyes
+      - MSSQL_PASSWORD=PasswordPeli
+
+  api:
+    ports:
+      - "8001:80"
+    networks:
+      - backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
