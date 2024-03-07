@@ -5,6 +5,7 @@ using System.Linq;
 using VueCineApi.Models;
 using VueCineApi.Data;
 using VueCineApi.Controllers;
+using VueCineApi.Dtos;
 
 namespace VueCineApi.Services{
 public class MovieService : IMovieService
@@ -26,9 +27,13 @@ public class MovieService : IMovieService
         return _movieData.GetMovieById(id);
     }
 
-    public void AddMovie(Movie movie)
+    public void AddMovie(AddMovieDto movieDto)
     {
-        _movieData.AddMovie(movie);
+            var movie = new Movie()
+            {
+                Id = movieDto.Id
+            };
+            _movieData.AddMovie(movie);
     }
 
     public void UpdateMovie(Movie updatedMovie)

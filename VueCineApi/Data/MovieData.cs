@@ -7,7 +7,7 @@ using VueCineApi.Services;
 using VueCineApi.Controllers;
 
 namespace VueCineApi.Data{
-public class MovieData
+public class MovieData 
 {
     //esto es para que atraves de _context puedas hacer crud a la bbdd(dbcontext)
     private readonly ApplicationDbContext _context;

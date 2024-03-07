@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using VueCineApi.Models;
 using VueCineApi.Services;
 using VueCineApi.Data;
+using VueCineApi.Dtos;
 
 namespace VueCineApi.Controllers{
 [ApiController]
@@ -40,7 +38,7 @@ public class MovieController : ControllerBase
 
     // POST: api/Movies
     [HttpPost]
-    public ActionResult<Movie> AddMovie([FromBody] Movie movie)
+    public ActionResult<Movie> AddMovie([FromBody] AddMovieDto movie)
     {
         if (!ModelState.IsValid)
         {
@@ -48,7 +46,7 @@ public class MovieController : ControllerBase
         }
         _movieService.AddMovie(movie);
         // Retorna la película creada con el código de estado 201 (Created)
-        return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
+        return NoContent();
     }
 
     // PUT: api/Movies/{id}
@@ -72,7 +70,7 @@ public class MovieController : ControllerBase
 
     // DELETE: api/Movies/{id}
     [HttpDelete("{id}")]
-    public IActionResult DeleteMovie(int id)
+    public IActionResult DeleteMovie(int id) 
     {
         var movie = _movieService.GetMovieById(id);
         if (movie == null)

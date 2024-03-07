@@ -13,7 +13,9 @@ public class Movie {
     public string? Title { get; set;}
     public string? Director { get; set;}
     public string? Actors { get; set;}
+    //relaccion uno a muchos con asientos
     public string? Description { get; set;}
-    
-}
+    public List<Sesion>Sesiones { get; set; }
+
+    }
 }

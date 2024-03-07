@@ -108,8 +108,48 @@ protected override void OnModelCreating (ModelBuilder modelBuilder)
         Description = "un talentoso piloto de carreras que, después de una serie de eventos inesperados, se encuentra en la oportunidad de su vida: competir en el torneo de carreras 'Gran Turismo'."
     }
 );
+// Configura la entidad Cine y sus relaciones.
+modelBuilder.Entity<Cine>()
+    .HasMany(c => c.Salas) // Un Cine tiene muchas Salas. Esto establece una relación uno a muchos.
+    .WithOne(s => s.Cine) // Cada Sala está relacionada con un único Cine. Esto establece la relación inversa.
+    .HasForeignKey(s => s.CineId); // Indica que la clave foránea en la entidad Sala es CineId.
+
+// Configura la entidad Sala y sus relaciones.
+modelBuilder.Entity<Sala>()
+    .HasOne(s => s.Cine) // Cada Sala pertenece a un único Cine. Esto establece una relación muchos a uno.
+    .WithMany(c => c.Salas) // Un Cine tiene muchas Salas. Esto establece la relación inversa.
+    .HasForeignKey(s => s.CineId); // Indica que la clave foránea en la entidad Sala que apunta al Cine es CineId.
+
+modelBuilder.Entity<Sala>()
+    .HasMany(s => s.Sesiones) // Una Sala tiene muchas Sesiones. Esto establece una relación uno a muchos.
+    .WithOne(se => se.Sala) // Cada Sesión se lleva a cabo en una única Sala. Esto establece la relación inversa.
+    .HasForeignKey(se => se.SalaId); // Indica que la clave foránea en la entidad Sesión es SalaId.
+
+modelBuilder.Entity<Sesion>()
+    .HasOne(s => s.Movie) // Cada Sesión está asociada a una única Movie.
+    .WithMany(m => m.Sesiones) // Una Movie puede estar asociada con muchas Sesiones.
+    .HasForeignKey(s => s.MovieId); // La clave foránea en Sesión que apunta a la Movie es MovieId.
+
+
+modelBuilder.Entity<Sesion>()
+    .HasOne(s => s.Sala) // Cada Sesión se lleva a cabo en una única Sala. Esto establece una relación muchos a uno.
+    .WithMany(s => s.Sesiones) // Una Sala puede contener muchas Sesiones. Esto establece la relación inversa.
+    .HasForeignKey(s => s.SalaId); // Indica que la clave foránea en la entidad Sesión que apunta a la Sala es SalaId.
+
+// Configura la entidad Asiento y sus relaciones.
+modelBuilder.Entity<Asiento>()
+    .HasOne(a => a.Sala) // Cada Asiento está asociado a una única Sala. Esto establece una relación muchos a uno.
+    .WithMany(s => s.Asientos) // Una Sala tiene muchos Asientos. Esto establece la relación inversa.
+    .HasForeignKey(a => a.SalaId); // Indica que la clave foránea en la entidad Asiento que apunta a la Sala es SalaId.
+
+        
 } 
 //esta es la lista que contien todas las peliculas(se usa para CRUD)
     public DbSet<Movie> Movies { get; set; }
+    public DbSet<Cine> Cines { get; set; }
+    public DbSet<Sala> Salas { get; set; }
+    public DbSet<Sesion> Sesiones { get; set; }
+    public DbSet<Asiento> Asientos { get; set; }
+     
 }
 }

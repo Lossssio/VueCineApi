@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "E:\\descargas\\vueCine\\VueCineApi\\VueCineApi.csproj": {}
+    "E:\\descargas\\VueCineApi (1)\\VueCineApi\\VueCineApi\\VueCineApi\\VueCineApi.csproj": {}
   },
   "projects": {
-    "E:\\descargas\\vueCine\\VueCineApi\\VueCineApi.csproj": {
+    "E:\\descargas\\VueCineApi (1)\\VueCineApi\\VueCineApi\\VueCineApi\\VueCineApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\descargas\\vueCine\\VueCineApi\\VueCineApi.csproj",
+        "projectUniqueName": "E:\\descargas\\VueCineApi (1)\\VueCineApi\\VueCineApi\\VueCineApi\\VueCineApi.csproj",
         "projectName": "VueCineApi",
-        "projectPath": "E:\\descargas\\vueCine\\VueCineApi\\VueCineApi.csproj",
+        "projectPath": "E:\\descargas\\VueCineApi (1)\\VueCineApi\\VueCineApi\\VueCineApi\\VueCineApi.csproj",
         "packagesPath": "C:\\Users\\raxor\\.nuget\\packages\\",
-        "outputPath": "E:\\descargas\\vueCine\\VueCineApi\\obj\\",
+        "outputPath": "E:\\descargas\\VueCineApi (1)\\VueCineApi\\VueCineApi\\VueCineApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\raxor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\raxor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -69,19 +76,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.25, 6.0.25]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.25, 6.0.25]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.25, 6.0.25]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.25, 6.0.25]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
@@ -92,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

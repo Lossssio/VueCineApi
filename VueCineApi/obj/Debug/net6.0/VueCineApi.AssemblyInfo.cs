@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VueCineApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b9801c80d68764dbd772a8674be75b77a098bdb")]
 [assembly: System.Reflection.AssemblyProductAttribute("VueCineApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VueCineApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

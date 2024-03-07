@@ -12,7 +12,7 @@ using VueCineApi.Data;
 namespace VueCineApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240227201925_InitialCreate")]
+    [Migration("20240306154949_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,58 @@ namespace VueCineApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("VueCineApi.Models.Asiento", b =>
+                {
+                    b.Property<int?>("AsientoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("AsientoId"), 1L, 1);
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Horario")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("NumAsientos")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tipo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AsientoId");
+
+                    b.HasIndex("SalaId");
+
+                    b.ToTable("Asientos");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Cine", b =>
+                {
+                    b.Property<int>("CineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CineId"), 1L, 1);
+
+                    b.Property<DateTime>("Horario")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("NumSalas")
+                        .HasColumnType("int");
+
+                    b.HasKey("CineId");
+
+                    b.ToTable("Cines");
+                });
 
             modelBuilder.Entity("VueCineApi.Models.Movie", b =>
                 {
@@ -142,6 +194,120 @@ namespace VueCineApi.Migrations
                             Image = "granturismo.png",
                             Title = "GRAN TURISMO"
                         });
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Sala", b =>
+                {
+                    b.Property<int>("SalaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalaId"), 1L, 1);
+
+                    b.Property<string>("Capacidad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Horario")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SalaId");
+
+                    b.HasIndex("CineId");
+
+                    b.ToTable("Salas");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Sesion", b =>
+                {
+                    b.Property<int?>("SesionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("SesionId"), 1L, 1);
+
+                    b.Property<DateTime>("Horario")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrecioEntrada")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SalaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SesionId");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("SalaId");
+
+                    b.ToTable("Sesiones");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Asiento", b =>
+                {
+                    b.HasOne("VueCineApi.Models.Sala", "Sala")
+                        .WithMany("Asientos")
+                        .HasForeignKey("SalaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sala");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Sala", b =>
+                {
+                    b.HasOne("VueCineApi.Models.Cine", "Cine")
+                        .WithMany("Salas")
+                        .HasForeignKey("CineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cine");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Sesion", b =>
+                {
+                    b.HasOne("VueCineApi.Models.Movie", "Movie")
+                        .WithMany("Sesiones")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VueCineApi.Models.Sala", "Sala")
+                        .WithMany("Sesiones")
+                        .HasForeignKey("SalaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Sala");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Cine", b =>
+                {
+                    b.Navigation("Salas");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Movie", b =>
+                {
+                    b.Navigation("Sesiones");
+                });
+
+            modelBuilder.Entity("VueCineApi.Models.Sala", b =>
+                {
+                    b.Navigation("Asientos");
+
+                    b.Navigation("Sesiones");
                 });
 #pragma warning restore 612, 618
         }
